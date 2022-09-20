@@ -5,6 +5,11 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Form1", "Form1\Form1.csproj", "{5238EB67-235B-4379-B739-F65DB102357F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5E7A1D2-2273-4D30-A3E8-D2936A9BF826}"
+	ProjectSection(SolutionItems) = preProject
+		Form1\bin\Debug\thk.png = Form1\bin\Debug\thk.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
