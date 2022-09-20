@@ -18,6 +18,7 @@ namespace Form1
         CheckBox mruut1, mruut2;
         RadioButton rnupp1, rnupp2, rnupp3, rnupp4;
         PictureBox pilt;
+        ProgressBar riba;
         public MinuOmaVorm()
         {
             Height = 600;
@@ -32,6 +33,7 @@ namespace Form1
             oksad.Nodes.Add(new TreeNode("Dialog MessageBox"));
             oksad.Nodes.Add(new TreeNode("Märkeruut-Checkbox"));
             oksad.Nodes.Add(new TreeNode("RadioNupp - RadioButton"));
+            oksad.Nodes.Add(new TreeNode("ProgressBar"));
 
             puu.AfterSelect += Puu_AfterSelect;
             puu.Nodes.Add(oksad);
@@ -148,6 +150,20 @@ namespace Form1
                 this.Controls.Add(rnupp4);
                 this.Controls.Add(pilt);
             }
+            else if (e.Node.Text == "ProgressBar")
+            {
+                riba = new ProgressBar
+                {
+                    Width = 400,
+                    Height = 30,
+                    Value = 40,
+                    Minimum = 0,
+                    Maximum = 100,
+                    Step = 1,
+                    Dock = DockStyle.Bottom
+                };
+                this.Controls.Add(riba);
+            }
         }
         private void Rnuppud_Changed(object sender,EventArgs e)
         {
@@ -172,9 +188,6 @@ namespace Form1
                 rnupp4.Checked = false;
             }
         }
-
-
-
 
         private void Mruut1_CheckedChanged(object sender, EventArgs e)
         {
