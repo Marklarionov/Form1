@@ -19,6 +19,7 @@ namespace Form1
         RadioButton rnupp1, rnupp2, rnupp3, rnupp4;
         PictureBox pilt;
         ProgressBar riba;
+        Timer aeg;
         public MinuOmaVorm()
         {
             Height = 600;
@@ -162,9 +163,17 @@ namespace Form1
                     Step = 1,
                     Dock = DockStyle.Bottom
                 };
+                aeg = new Timer();
+                aeg.Enabled = true;
+                aeg.Tick += Aeg_Tick;
                 this.Controls.Add(riba);
             }
         }
+        private void Aeg_Tick(object sender, EventArgs e)
+        {
+            riba.PerformStep();
+        }
+
         private void Rnuppud_Changed(object sender,EventArgs e)
         {
             if (rnupp1.Checked)
