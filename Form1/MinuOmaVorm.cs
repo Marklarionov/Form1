@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace Form1
 {
@@ -20,6 +21,7 @@ namespace Form1
         PictureBox pilt;
         ProgressBar riba;
         Timer aeg;
+        TextBox tekst;
         public MinuOmaVorm()
         {
             Height = 600;
@@ -35,12 +37,24 @@ namespace Form1
             oksad.Nodes.Add(new TreeNode("Märkeruut-Checkbox"));
             oksad.Nodes.Add(new TreeNode("RadioNupp - RadioButton"));
             oksad.Nodes.Add(new TreeNode("ProgressBar"));
-
+            oksad.Nodes.Add(new TreeNode("Tekstkast"));
+            oksad.Nodes.Add(new TreeNode("OmaVorm"));
             puu.AfterSelect += Puu_AfterSelect;
             puu.Nodes.Add(oksad);
+            puu.DoubleClick += Puu_DoubleClick;
             this.Controls.Add(puu);
         }
-
+        private void Puu_DoubleClick(object sender, EventArgs e)
+        {
+            if (tekst.Enabled)
+            {
+                tekst.Enabled = false;
+            }
+            else
+            {
+                tekst.Enabled = true;
+            }
+        }
         private void Puu_AfterSelect(object sender, TreeViewEventArgs e)
         {
             pilt = new PictureBox
@@ -50,7 +64,22 @@ namespace Form1
                 Size = new Size(100, 100),
                 SizeMode = PictureBoxSizeMode.Zoom,
             };
-
+            /*mruut1 = new CheckBox
+            {
+                Checked = false,
+                Text = "Punane",
+                Location = new Point(silt.Left + silt.Width, 0),
+                Width = 100,
+                Height = 25
+            };
+            mruut2 = new CheckBox
+            {
+                Checked = false,
+                Text = "Sinine",
+                Location = new Point(silt.Left + silt.Width, mruut1.Height),
+                Width = 100,
+                Height = 25
+            };*/
             silt = new Label
             {
                 Text = "Minu esimene vorm",
@@ -168,12 +197,39 @@ namespace Form1
                 aeg.Tick += Aeg_Tick;
                 this.Controls.Add(riba);
             }
+            else if (e.Node.Text == "Tekstkast")
+            {
+                tekst = new TextBox
+                {
+                    Font = new Font("Arial", 34, FontStyle.Italic),
+                    Location = new Point(350, 400),
+                    Enabled = false
+                };
+                tekst.MouseDoubleClick += Tekst_MouseDoubleClick;
+                this.Controls.Add(tekst);
+            }
+            else if (e.Node.Text == "OmaVorm")
+            {
+                OmaVorm oma = new OmaVorm("Kuulame muusikat" , "Faili nimi");
+                oma.ShowDialog();
+            }
+        
+        }
+        private void Tekst_MouseDoubleClick(object sender, EventArgs e)
+        {
+            if (tekst.Enabled)
+            {
+                tekst.Enabled = false;
+            }
+            else
+            {
+                tekst.Enabled = true;
+            }
         }
         private void Aeg_Tick(object sender, EventArgs e)
         {
             riba.PerformStep();
         }
-
         private void Rnuppud_Changed(object sender,EventArgs e)
         {
             if (rnupp1.Checked)
@@ -197,7 +253,6 @@ namespace Form1
                 rnupp4.Checked = false;
             }
         }
-
         private void Mruut1_CheckedChanged(object sender, EventArgs e)
         {
             if (mruut1.Checked=true && mruut2.Checked==false)
@@ -217,19 +272,16 @@ namespace Form1
                 this.BackColor = Color.Gray;
             }
         }
-
         private void Silt_MouseLeave(object sender, EventArgs e)
         {
             silt.ForeColor = Color.Black;
             silt.BackColor = Color.Transparent;
         }
-
         private void Silt_MouseEnter(object sender, EventArgs e)
         {
             silt.ForeColor = Color.White;
             silt.BackColor = Color.Black;
         }
-
         Random random = new Random();
         private void Nupp_Click(object sender, EventArgs e)
         {
