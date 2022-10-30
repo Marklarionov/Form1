@@ -39,32 +39,22 @@ namespace Form1
             oksad.Nodes.Add(new TreeNode("ProgressBar"));
             oksad.Nodes.Add(new TreeNode("Tekstkast"));
             oksad.Nodes.Add(new TreeNode("OmaVorm"));
+
             puu.AfterSelect += Puu_AfterSelect;
             puu.Nodes.Add(oksad);
-            puu.DoubleClick += Puu_DoubleClick;
             this.Controls.Add(puu);
-        }
-        private void Puu_DoubleClick(object sender, EventArgs e)
-        {
-            if (tekst.Enabled)
-            {
-                tekst.Enabled = false;
-            }
-            else
-            {
-                tekst.Enabled = true;
-            }
         }
         private void Puu_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            pilt = new PictureBox
+
+            silt = new Label
             {
-                Image = new Bitmap("thk.png"),
-                Location = new Point(300, 450),
-                Size = new Size(100, 100),
-                SizeMode = PictureBoxSizeMode.Zoom,
+                Text = "Minu esimene vorm",
+                Size = new Size(200, 50),
+                Location = new Point(200, 0)
+
             };
-            /*mruut1 = new CheckBox
+            mruut1 = new CheckBox
             {
                 Checked = false,
                 Text = "Punane",
@@ -79,13 +69,6 @@ namespace Form1
                 Location = new Point(silt.Left + silt.Width, mruut1.Height),
                 Width = 100,
                 Height = 25
-            };*/
-            silt = new Label
-            {
-                Text = "Minu esimene vorm",
-                Size = new Size(200, 50),
-                Location = new Point(200, 0)
-
             };
             if (e.Node.Text == "Nupp")
             {
@@ -101,6 +84,7 @@ namespace Form1
             {
                 silt.MouseEnter += Silt_MouseEnter;
                 silt.MouseLeave += Silt_MouseLeave;
+
                 this.Controls.Add(silt);
             }
             else if (e.Node.Text == "Dialog MessageBox")
@@ -117,29 +101,14 @@ namespace Form1
                 }
             }
             else if (e.Node.Text == "Märkeruut-Checkbox")
-            {
-                mruut1 = new CheckBox
-                {
-                    Checked = false,
-                    Text = "Üks",
-                    Location = new Point(silt.Left + silt.Width, 0),
-                    Width = 100,
-                    Height = 25
-                };
-
-                mruut2 = new CheckBox
-                {
-                    Checked = false,
-                    Text = "Kaks",
-                    Location = new Point(silt.Left + silt.Width, mruut1.Height),
-                    Width = 100,
-                    Height = 25
-                };
-                mruut1.CheckedChanged += Mruut1_CheckedChanged;
-                mruut2.CheckedChanged += Mruut1_CheckedChanged;
-
+            {             
                 this.Controls.Add(mruut1);
                 this.Controls.Add(mruut2);
+
+                mruut1.CheckedChanged += new EventHandler(Mruut1_CheckedChanged);
+                mruut2.CheckedChanged += (Mruut1_CheckedChanged);
+
+
             }
             else if (e.Node.Text == "RadioNupp - RadioButton")
             {
@@ -168,17 +137,24 @@ namespace Form1
                     Location = new Point(mruut2.Left + mruut2.Width + rnupp1.Width + rnupp2.Width + rnupp3.Width, mruut1.Height + mruut2.Height),
                 };
 
+                pilt = new PictureBox
+                {
+                    Image = new Bitmap(@"thk.png"),
+                    Location = new Point(300, 450),
+                    Size = new Size(100, 100),
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                };
+           
+                this.Controls.Add(pilt);
+                this.Controls.Add(rnupp1);
+                this.Controls.Add(rnupp2);
+                this.Controls.Add(rnupp3);
+                this.Controls.Add(rnupp4);      
+                
                 rnupp1.CheckedChanged += new EventHandler(Rnuppud_Changed);
                 rnupp2.CheckedChanged += new EventHandler(Rnuppud_Changed);
                 rnupp3.CheckedChanged += new EventHandler(Rnuppud_Changed);
                 rnupp4.CheckedChanged += new EventHandler(Rnuppud_Changed);
-
-
-                this.Controls.Add(rnupp1);
-                this.Controls.Add(rnupp2);
-                this.Controls.Add(rnupp3);
-                this.Controls.Add(rnupp4);
-                this.Controls.Add(pilt);
             }
             else if (e.Node.Text == "ProgressBar")
             {
@@ -255,22 +231,18 @@ namespace Form1
         }
         private void Mruut1_CheckedChanged(object sender, EventArgs e)
         {
-            if (mruut1.Checked=true && mruut2.Checked==false)
+            if (mruut1.Checked == true && mruut2.Checked==false)
             {
-                this.BackColor = Color.Red;
+                MessageBox.Show("1=True, 2=False", "Aken");
             }
-            else if (mruut1.Checked = false && mruut2.Checked == true)
+            else if (mruut1.Checked == false && mruut2.Checked == true)
             {
-                this.BackColor = Color.Green;
+                MessageBox.Show("1=False, 2=True", "Aken");
             }
-            else if (mruut1.Checked = true && mruut2.Checked == true)
+            else if (mruut1.Checked == true && mruut2.Checked == true)
             {
-                this.BackColor = Color.Yellow;
+                MessageBox.Show("1=True, 2=True", "Aken");
             } 
-            else if (mruut1.Checked = false && mruut2.Checked == false)
-            {
-                this.BackColor = Color.Gray;
-            }
         }
         private void Silt_MouseLeave(object sender, EventArgs e)
         {

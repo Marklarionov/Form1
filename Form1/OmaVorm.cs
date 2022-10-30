@@ -14,37 +14,103 @@ namespace Form1
     public partial class OmaVorm : Form
     {
         public OmaVorm() { }
-        RadioButton Mnupp;
         public OmaVorm(string Pealkiri, string Fail)
         {
-
-            this.ClientSize = new System.Drawing.Size(300, 300);
-            /*this.Text = Pealkiri;
+            this.ClientSize = new System.Drawing.Size(380, 320);
+            this.Text = Pealkiri;
+            Label fail = new Label
             {
-                Text = "Chill",
-                Location = new System.Drawing.Point(50, 50),
-                Size = new System.Drawing.Size(100, 75),
-                BackColor = System.Drawing.Color.LightGray
-            };*/
-            Label failinimi = new Label
-            {
-                Text = Fail,
-                Location = new System.Drawing.Point(50, 50),
-                Size = new System.Drawing.Size(100, 75),
-                BackColor = System.Drawing.Color.LightGray
+                Text = "" ,
+                Location = new System.Drawing.Point(150, 120),
+                Size = new System.Drawing.Size(120, 40),
+                //BackColor = System.Drawing.Color.LightGray
             };
-            this.Controls.Add(failinimi);
+
+            Button nupp = new Button
+            {
+                Text = String.Format("Kuulame esimese muusikat"),
+                Location = new System.Drawing.Point(50, 50),
+                Size = new System.Drawing.Size(100, 50),
+                BackColor = System.Drawing.Color.White,
+
+            };
+            nupp.Click += Nupp_Click;
+            Button nupp1 = new Button
+            {
+                Text = String.Format("Kuulame teise muusikat"),
+                Location = new System.Drawing.Point(150, 50),
+                Size = new System.Drawing.Size(100, 50),
+                BackColor = System.Drawing.Color.White,
+            };
+            nupp1.Click += Nupp_Click1;
+
+            Button nupp2 = new Button
+            {
+                Text = String.Format("Kuulame kolmas muusikat"),
+                Location = new System.Drawing.Point(250, 50),
+                Size = new System.Drawing.Size(100, 50),
+                BackColor = System.Drawing.Color.White,
+            };
+            nupp2.Click += Nupp_Click2;
+
+
+
+            this.Controls.Add(nupp);
+            this.Controls.Add(nupp1);
+            this.Controls.Add(nupp2);
+            this.Controls.Add(fail);
+
+
         }
+
+
         private void Nupp_Click(object sender, EventArgs e)
         {
             Button nupp_sender = (Button)sender;
             var vastus = MessageBox.Show("Kas tahad muusika kuulata?", "Küsimus", MessageBoxButtons.YesNo);
             if (vastus == DialogResult.Yes)
             {
-                using (var muusika = new SoundPlayer(@"..\..\..\chill.wav"))
+                using (var muusika = new SoundPlayer(@"..\..\chill.wav"))
                 {
-                    MessageBox.Show("Muusika Mängitakse!");
                     muusika.Play();
+                    MessageBox.Show("Mängib - Chill");
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Okay...");
+            }
+        }
+        private void Nupp_Click1(object sender, EventArgs e)
+        {
+            Button nupp_sender = (Button)sender;
+            var vastus = MessageBox.Show("Kas tahad muusika kuulata?", "Küsimus", MessageBoxButtons.YesNo);
+            if (vastus == DialogResult.Yes)
+            {
+                using (var muusika = new SoundPlayer(@"..\..\Gangsta.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Mängib - Gangsta");
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Okay...");
+            }
+        }
+        private void Nupp_Click2(object sender, EventArgs e)
+        {
+            Button nupp_sender = (Button)sender;
+            var vastus = MessageBox.Show("Kas tahad muusika kuulata?", "Küsimus", MessageBoxButtons.YesNo);
+            if (vastus == DialogResult.Yes)
+            {
+                using (var muusika = new SoundPlayer(@"..\..\chill.wav"))
+                {
+                    muusika.Play();
+                    MessageBox.Show("Mängib - chill");
+
                 }
             }
             else
